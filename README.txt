@@ -97,12 +97,12 @@ int WINAPI   Myrecv(SOCKET s, const char* buf, int len, int flags)
   hook_recv  true_recv;
   DWORD      addr;
 
-  printf("I'm in the hook function");
+  printf("I'm in the hook function\n");
 
   addr = getReturnAddressByName("recv", "ws2_32.dll");
 
   if ((int) addr < 0)
-      printf("If you get here, you're doing something wrong\n", (int)addr);
+      printf("If you get here, you're doing something wrong -> %i\n", (int)addr);
 
   true_recv = (hook_recv) addr;
 
@@ -117,6 +117,7 @@ int	main(void)
   ret = hookit("recv", "ws2_32.dll", (DWORD)Myrecv);
   if (ret <= 0)
     printf("Some error here: %i\n", ret);
+  unhookById(ret);  // or unhookByName("recv", "ws2_32.dll");
 
   return (0);
 }
