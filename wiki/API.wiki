@@ -30,8 +30,8 @@ following values is returned:
 <tr><td>UNKNOWN_OPCODE(-1)</td><td>BeaEngine return value</td></tr>
 <tr><td>OUT_OF_BLOCK(0)</td><td>BeaEngine return value</td></tr>
 </table>
-If succeed the value returned by hookit is an ID and it can be used later to
-cleanup the hook.
+
+_If succeed the value returned by hookit is an ID (> 0x1000) and it can be used later to cleanup the hook._
 
 = EXAMPLE =
 {{{
