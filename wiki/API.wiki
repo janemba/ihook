@@ -172,5 +172,5 @@ do this, it takes the ID returned by a previous call to _hookit_.
 *unhookById* return TRUE if succeed, otherwise one of the following values is returned:
 <table>
 <tr><td>ERR_PROT(-4)</td><td>Can't set permission for the page pointed by the function to hook</td></tr>
-<tr><td>ERR_NOTLIST(-5)</td><td>Function not in list</td></tr>
+<tr><td>ERR_NOTLIST(-5)</td><td>Function not in list (not hooked)</td></tr>
 </table>
