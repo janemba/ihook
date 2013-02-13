@@ -1,3 +1,4 @@
+#labels Phase-Implementation
 #ihook API
 
 = NAME =
@@ -22,7 +23,7 @@ specified by _hookaddr_.
 
 *hookit* function return a positive value (> 0) if succeed. Otherwise one of the
 following values is returned:
-<table>
+<table border="1">
 <tr><td>ERR_ALLOCA(-2)</td><td>Can't allocate memory</td></tr>
 </table>
    || ERR_ADDR(-3)       || Can't get address of function to hook ||
