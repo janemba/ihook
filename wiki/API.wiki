@@ -33,9 +33,9 @@ cleanup the hook.
 
 = EXAMPLE =
 {{{
-	DWORD ret;
+DWORD ret;
 
-	ret = hookit("recv", "ws2_32.dll", (DWORD)MyHookFct);
+ret = hookit("recv", "ws2_32.dll", (DWORD)MyHookFct);
 }}}
 
 ----
@@ -65,15 +65,15 @@ name which this function belong to.
 
 = EXAMPLE =
 {{{
-	typedef int (WINAPI* hook_recv) (SOCKET, const char*, int , int);	
+typedef int (WINAPI* hook_recv) (SOCKET, const char*, int , int);	
 
-	DWORD addr;
-	hook_recv fct;
+DWORD addr;
+hook_recv fct;
 
-	addr = getReturnAddressByName("recv", "ws2_32.dll");
-	if ((int) addr < 0)
-	  printf("You did something wrong\n");		
-	fct = (hook_recv) addr;
+addr = getReturnAddressByName("recv", "ws2_32.dll");
+if ((int) addr < 0)
+  printf("You did something wrong\n");		
+fct = (hook_recv) addr;
 }}}
 	
 ----
@@ -105,15 +105,15 @@ function hooked. If failed, the following value is returned:
 
 = EXAMPLE =
 {{{
-	typedef int (WINAPI* hook_recv) (SOCKET, const char*, int , int);	
+typedef int (WINAPI* hook_recv) (SOCKET, const char*, int , int);	
 
-	DWORD addr;
-	hook_recv fct;
+DWORD addr;
+hook_recv fct;
 
-	addr = getReturnAddressById(0x1000);
-	if ((int) addr < 0)
-	  printf("You did something wrong\n");		
-	fct = (hook_recv) addr;
+addr = getReturnAddressById(0x1000);
+if ((int) addr < 0)
+  printf("You did something wrong\n");		
+fct = (hook_recv) addr;
 }}}
 
 ----
