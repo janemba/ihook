@@ -23,7 +23,7 @@ specified by _hookaddr_.
 
 *hookit* function return a positive value (> 0) if succeed. Otherwise one of the
 following values is returned:
-<table border="0">
+<table>
 <tr><td>ERR_ALLOCA(-2)</td><td>Can't allocate memory</td></tr>
 <tr><td>ERR_ADDR(-3)</td><td>Can't get address of function to hook</td></tr>
 <tr><td>ERR_PROT(-4)</td><td>Can't set permission for the page pointed by the function to hook</td></tr>
@@ -57,13 +57,15 @@ IHOOKAPI DWORD IHOOKCALL getReturnAddressByName(char *fctname, char *dllname);
 = DESCRIPTION =
 
 *getReturnAddressByName* function return a pointer in order to execute the original
-function. To do this, it takes the function name pointed by "fctname" and the DLL
+function. To do this, it takes the function name pointed by _fctname_ and the DLL
 name which this function belong to.
 
 = RETURN VALUE =
 
 *getReturnAddressByName* function return an address in DWORD format if succeed. This value need to be casted to a function pointer with the same prototype of the function hooked. If failed, the following value is returned:
-   * ERR_NOTLIST(-5)     // Function not in list
+<table>
+<tr><td>ERR_NOTLIST(-5)</td><td>Function not in list (not hooked)</td></tr>
+</table>
 
 = EXAMPLE =
 {{{
@@ -95,15 +97,16 @@ IHOOKAPI DWORD IHOOKCALL getReturnAddressById(DWORD id);
 = DESCRIPTION =
 
 *getReturnAddressById* function return a pointer in order to execute the original
-function. To do this, it takes an ID returned by "hookit" function.
+function. To do this, it takes an ID returned by _hookit_ function.
 
 = RETURN VALUE =
 
 *getReturnAddressById* function return an address in DWORD format if succeed. This
 value need to be casted to a function pointer with the same prototype of the
 function hooked. If failed, the following value is returned:
-   * ERR_NOTLIST(-5)     // Function not in list
-
+<table>
+<tr><td>ERR_NOTLIST(-5)</td><td>Function not in list (not hooked)</td></tr>
+</table>
 
 = EXAMPLE =
 {{{
@@ -134,14 +137,16 @@ IHOOKAPI int IHOOKCALL unhookByName(char *fctname, char *dllname);
 
 = DESCRIPTION =
 
-*unhookByName* function cleanup the inline patching executed by "hookit" function. To do this, it takes the function name pointed by "fctname" and the DLL name which this function belong to.
+*unhookByName* function cleanup the inline patching executed by _hookit_ function. To do this, it takes the function name pointed by _fctname_ and the DLL name which this function belong to.
 
 = RETURN VALUE =
 
-*unhookByName* return TRUE if succeed, otherwirse one of the following values is returned:
-    * ERR_PROT(-4)	// Can't set permission for the page pointed by the function to hook
-    * ERR_NOTLIST(-5)     // Function not in list
-    * ERR_PARAM(-6)	// Bad parameters
+*unhookByName* return TRUE if succeed, otherwise one of the following values is returned:
+<table>
+<tr><td>ERR_PROT(-4)</td><td>Can't set permission for the page pointed by the function to hook</td></tr>
+<tr><td>ERR_NOTLIST(-5)</td><td>Function not in list (not hooked)</td></tr>
+<tr><td>ERR_PARAM(-6)</td><td>Bad parameters</td></tr>
+</table>
 
 ----
 
@@ -159,11 +164,13 @@ IHOOKAPI int IHOOKCALL unhookById(DWORD id);
 
 = DESCRIPTION =
 
-*unhookById* function cleanup the inline patching executed by "hookit" function. To
-do this, it takes the ID returned by a previous call to "hookit".
+*unhookById* function cleanup the inline patching executed by _hookit_ function. To
+do this, it takes the ID returned by a previous call to _hookit_.
 
 = RETURN VALUE =
 
-*unhookById* return TRUE if succeed, otherwirse one of the following values is returned:
-    * ERR_PROT(-4)	// Can't set permission for the page pointed by the function to hook
-    * ERR_NOTLIST(-5)     // Function not in list
+*unhookById* return TRUE if succeed, otherwise one of the following values is returned:
+<table>
+<tr><td>ERR_PROT(-4)<td></td>Can't set permission for the page pointed by the function to hook</td></tr>
+<tr><td>ERR_NOTLIST(-5)<td></td>Function not in list</td></tr>
+</table>
