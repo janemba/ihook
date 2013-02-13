@@ -22,11 +22,11 @@ specified by "hookaddr".
 
 hookit function return a positive value (> 0) if succeed. Otherwise one of the
 following values is returned:
-   ERR_ALLOCA(-2)     // Can't allocate memory
-   ERR_ADDR(-3)	      // Can't get address of function to hook
-   ERR_PROT(-4)	      // Can't set permission for the page pointed by the function to hook
-   UNKNOWN_OPCODE(-1) // BeaEngine return value
-   OUT_OF_BLOCK(0)    // BeaEngine return value
+   * ERR_ALLOCA(-2)     // Can't allocate memory
+   * ERR_ADDR(-3)	      // Can't get address of function to hook
+   * ERR_PROT(-4)	      // Can't set permission for the page pointed by the function to hook
+   * UNKNOWN_OPCODE(-1) // BeaEngine return value
+   * OUT_OF_BLOCK(0)    // BeaEngine return value
 
 If succeed the value returned by hookit is an ID and it can be used later to
 cleanup the hook.
@@ -61,7 +61,7 @@ name which this function belong to.
 = RETURN VALUE =
 
 *getReturnAddressByName* function return an address in DWORD format if succeed. This value need to be casted to a function pointer with the same prototype of the function hooked. If failed, the following value is returned:
-   ERR_NOTLIST(-5)     // Function not in list
+   * ERR_NOTLIST(-5)     // Function not in list
 
 = EXAMPLE =
 {{{
@@ -100,7 +100,7 @@ function. To do this, it takes an ID returned by "hookit" function.
 *getReturnAddressById* function return an address in DWORD format if succeed. This
 value need to be casted to a function pointer with the same prototype of the
 function hooked. If failed, the following value is returned:
-   ERR_NOTLIST(-5)     // Function not in list
+   * ERR_NOTLIST(-5)     // Function not in list
 
 
 = EXAMPLE =
@@ -137,9 +137,9 @@ IHOOKAPI int IHOOKCALL unhookByName(char *fctname, char *dllname);
 = RETURN VALUE =
 
 *unhookByName* return TRUE if succeed, otherwirse one of the following values is returned:
-    ERR_PROT(-4)	// Can't set permission for the page pointed by the function to hook
-    ERR_NOTLIST(-5)     // Function not in list
-    ERR_PARAM(-6)	// Bad parameters
+    * ERR_PROT(-4)	// Can't set permission for the page pointed by the function to hook
+    * ERR_NOTLIST(-5)     // Function not in list
+    * ERR_PARAM(-6)	// Bad parameters
 
 ----
 
@@ -163,5 +163,5 @@ do this, it takes the ID returned by a previous call to "hookit".
 = RETURN VALUE =
 
 *unhookById* return TRUE if succeed, otherwirse one of the following values is returned:
-    ERR_PROT(-4)	// Can't set permission for the page pointed by the function to hook
-    ERR_NOTLIST(-5)     // Function not in list
+    * ERR_PROT(-4)	// Can't set permission for the page pointed by the function to hook
+    * ERR_NOTLIST(-5)     // Function not in list
