@@ -80,3 +80,4 @@ mingw32-g++-4.7.2.exe -shared -o ihook_test.dll  obj\\Release\\main.o -s -luser3
 ----
 
 Next *RemoteDLL* was used to inject the DLL inside *IEXPLORE.exe* process.
+[http://code.google.com/p/ihook/wiki/ihook_static.PNG]
