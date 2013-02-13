@@ -78,4 +78,4 @@ mingw32-g++-4.7.2.exe -O2  -Wall -DBUILD_DLL -DIHOOK_ENGINE_LIB -c main.cpp -o o
 mingw32-g++-4.7.2.exe -shared -o ihook_test.dll  obj\\Release\\main.o -s -luser32 libihook.lib
 }}}
 
-Next I used *RemoteDLL* to inject the DLL inside *IEXPLORE.exe* process.
+Next *RemoteDLL* was used to inject the DLL inside *IEXPLORE.exe* process.
