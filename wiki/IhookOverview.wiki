@@ -7,7 +7,7 @@ Here is a detailed overview of ihook in action. All the example was compiled wit
 
 = Using ihook static libray for DLL injection =
 
-`main.cpp`
+=== `main.cpp` ===
 {{{
 #include "main.h"
 
@@ -51,7 +51,7 @@ extern "C" DLL_EXPORT BOOL APIENTRY DllMain(HINSTANCE hinstDLL, DWORD fdwReason,
 }
 }}}
 ----
-`main.h`
+=== `main.h` ===
 {{{
 #ifndef __MAIN_H__
 #define __MAIN_H__
@@ -72,7 +72,7 @@ extern "C" DLL_EXPORT BOOL APIENTRY DllMain(HINSTANCE hinstDLL, DWORD fdwReason,
 }}}
 ----
 
-compilation
+=== compilation ===
 {{{
 mingw32-g++-4.7.2.exe -O2  -Wall -DBUILD_DLL -DIHOOK_ENGINE_LIB -c main.cpp -o obj\Release\main.o
 mingw32-g++-4.7.2.exe -shared -o ihook_test.dll  obj\\Release\\main.o -s -luser32 libihook.lib
