@@ -86,6 +86,8 @@ Next *RemoteDLL* was used to inject the DLL inside *IEXPLORE.exe* process.
 
 [http://ihook.googlecode.com/svn/wiki/ihook_static.png]
 
+
+
 = Using ihook shared libray for a basic application =
 
 In this example we simply hooked _recv_ function from _ws2_32.dll_ API. For this, a basic client sending an HTTP request is used (stolen from msdn).
