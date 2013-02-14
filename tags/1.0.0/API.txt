@@ -1,0 +1,166 @@
+NAME
+
+hookit
+
+SYNOPSIS
+
+#define IHOOK_CALL_STDCALL
+#include "hookit.h"
+
+IHOOKAPI int IHOOKCALL hookit(char *fctname, char *dllname, DWORD hookaddr);
+
+DESCRIPTION
+
+hookit function perform an inline patching on the function specified by 
+"fctname" which belong to "dllname". The patch is a short jump to an address
+specified by "hookaddr".
+
+RETURN VALUE
+
+hookit function return a positive value (> 0) if succeed. Otherwise one of the
+following values is returned:
+   ERR_ALLOCA(-2)     // Can't allocate memory
+   ERR_ADDR(-3)	      // Can't get address of function to hook
+   ERR_PROT(-4)	      // Can't set permission for the page pointed by the function to hook
+   UNKNOWN_OPCODE(-1) // BeaEngine return value
+   OUT_OF_BLOCK(0)    // BeaEngine return value
+
+If succeed the value returned by hookit is an ID and it can be used later to
+cleanup the hook.
+
+EXAMPLE
+	DWORD ret;
+
+	ret = hookit("recv", "ws2_32.dll", (DWORD)MyHookFct);
+
+
+----------------------------------------
+
+
+NAME
+
+getReturnAddressByName
+
+SYNOPSIS
+
+#define IHOOK_CALL_STDCALL
+#include "hookit.h"
+
+IHOOKAPI DWORD IHOOKCALL getReturnAddressByName(char *fctname, char *dllname);
+
+DESCRIPTION
+
+getReturnAddressByName function return a pointer in order to execute the original
+function. To do this, it takes the function name pointed by "fctname" and the DLL
+name which this function belong to.
+
+RETURN VALUE
+
+getReturnAddressByName function return an address in DWORD format if succeed. This
+value need to be casted to a function pointer with the same prototype of the function
+hooked. 
+If failed, the following value is returned:
+   ERR_NOTLIST(-5)     // Function not in list
+
+EXAMPLE
+	typedef int (WINAPI* hook_recv) (SOCKET, const char*, int , int);	
+
+	DWORD addr;
+	hook_recv fct;
+
+	addr = getReturnAddressByName("recv", "ws2_32.dll");
+	if ((int) addr < 0)
+	  printf("You did something wrong\n");		
+	fct = (hook_recv) addr;
+
+	
+
+----------------------------------------
+
+NAME
+
+getReturnAddressById
+
+SYNOPSIS
+
+#define IHOOK_CALL_STDCALL
+#include "hookit.h"
+
+IHOOKAPI DWORD IHOOKCALL getReturnAddressById(DWORD id);
+
+DESCRIPTION
+
+getReturnAddressById function return a pointer in order to execute the original
+function. To do this, it takes an ID returned by "hookit" function.
+
+RETURN VALUE
+
+getReturnAddressById function return an address in DWORD format if succeed. This
+value need to be casted to a function pointer with the same prototype of the
+function hooked.
+If failed, the following value is returned:
+   ERR_NOTLIST(-5)     // Function not in list
+
+
+EXAMPLE
+	typedef int (WINAPI* hook_recv) (SOCKET, const char*, int , int);	
+
+	DWORD addr;
+	hook_recv fct;
+
+	addr = getReturnAddressById(0x1000);
+	if ((int) addr < 0)
+	  printf("You did something wrong\n");		
+	fct = (hook_recv) addr;
+
+
+----------------------------------------
+
+NAME
+
+unhookByName
+
+SYNOPSIS
+
+#define IHOOK_CALL_STDCALL
+#include "hookit.h"
+
+IHOOKAPI int IHOOKCALL unhookByName(char *fctname, char *dllname);
+
+DESCRIPTION
+
+unhookByName function cleanup the inline patching executed by "hookit" function. To
+do this, it takes the function name pointed by "fctname" and the DLL name which this
+function belong to.
+
+RETURN VALUE
+
+unhookByName return TRUE if succeed, otherwirse one of the following values is returned:
+    ERR_PROT(-4)	// Can't set permission for the page pointed by the function to hook
+    ERR_NOTLIST(-5)     // Function not in list
+    ERR_PARAM(-6)	// Bad parameters
+
+
+----------------------------------------
+
+NAME
+
+unhookById
+
+SYNOPSIS
+
+#define IHOOK_CALL_STDCALL
+#include "hookit.h"
+
+IHOOKAPI int IHOOKCALL unhookById(DWORD id);
+
+DESCRIPTION
+
+unhookById function cleanup the inline patching executed by "hookit" function. To
+do this, it takes the ID returned by a previous call to "hookit".
+
+RETURN VALUE
+
+unhookById return TRUE if succeed, otherwirse one of the following values is returned:
+    ERR_PROT(-4)	// Can't set permission for the page pointed by the function to hook
+    ERR_NOTLIST(-5)     // Function not in list

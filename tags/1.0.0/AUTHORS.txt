@@ -1,0 +1,5 @@
+IHOOK AUTHORS
+=============
+
+janemba <cap.janemba@gmail.com>
+	Initial author of ihook
