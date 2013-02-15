@@ -1,8 +1,6 @@
 #labels Phase-Implementation
 #ihook API
 
-[WikiSyntax#unhookById]
-
 = NAME =
 
 == hookit ==
