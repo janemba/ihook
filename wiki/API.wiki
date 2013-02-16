@@ -1,5 +1,5 @@
 #labels Phase-Implementation
-[#hookit]<br/>
+#hookit<br/>
 [#getReturnAddressByName]<br/>
 [#getReturnAddressById]<br/>
 [#unhookByName]<br/>
