@@ -1,6 +1,4 @@
 #labels Phase-Implementation
-#ihook overview
-
 = Introduction =
 
 Here is a detailed overview of ihook in action. All the example was compiled with mingw32-g++/mingw32-gcc also, Code::Blocks IDE was used.
