@@ -1,7 +1,9 @@
 #labels Phase-Implementation
-#ihook API
-
-[#getReturnAddressById]
+#hookit¶
+#getReturnAddressByName¶
+#getReturnAddressById¶
+#unhookByName¶
+#unhookById¶
 
 = NAME =
 
