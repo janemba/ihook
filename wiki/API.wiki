@@ -1,11 +1,10 @@
 #labels Phase-Implementation
-{{{
 [#hookit]
 [#getReturnAddressByName]
 [#getReturnAddressById]
 [#unhookByName]
 [#unhookById]
-}}}
+
 
 = NAME =
 
