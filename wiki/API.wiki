@@ -6,9 +6,8 @@
 	* [API#unhookByName unhookByName]
 	* [API#unhookById unhookById]
 
-
 ----
-
+----
 
 = NAME =
 
