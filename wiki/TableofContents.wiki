@@ -1,3 +1,7 @@
 	* [http://code.google.com/p/ihook/wiki/API API]
-		* [API#hookit label]
+		* [API#hookit method: hookit]
+		* [API#hookit method: getReturnAddressByName]
+		* [API#hookit method: getReturnAddressById]
+		* [API#hookit method: unhookByName]
+		* [API#hookit method: unhookById]
 	* [http://code.google.com/p/ihook/wiki/IhookOverview IHOOK OVERVIEW]
