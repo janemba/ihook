@@ -1,5 +1,7 @@
 = SUMMARY =
-	* [http://code.google.com/p/ihook/wiki/API API]
+	* [http://code.google.com/p/ihook/ HOME]
+		* [http://code.google.com/p/ihook#ihook IHOOK]
+		* [http://code.google.com/p/ihook#dependency dependency]
 	* [API]
 		* [API#hookit method: hookit]
 		* [API#hookit method: getReturnAddressByName]
