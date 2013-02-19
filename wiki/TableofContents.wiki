@@ -1,3 +1,4 @@
+#comment test
 = SUMMARY =
 	* [http://code.google.com/p/ihook/ HOME]
 		* [http://code.google.com/p/ihook#ihook IHOOK]
