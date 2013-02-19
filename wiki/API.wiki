@@ -1,5 +1,6 @@
 #labels Phase-Implementation
 = METHOD LIST =
+<wiki:toc max_depth="1" />
 	* [API#hookit hookit]
 	* [API#getReturnAddressByName getReturnAddressByName]
 	* [API#getReturnAddressById getReturnAddressById]
