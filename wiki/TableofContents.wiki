@@ -1,4 +1,5 @@
-	* [http://code.google.com/p/ihook/wiki/API API]
+= SUMMARY =
+* [http://code.google.com/p/ihook/wiki/API API]
 		* [API#hookit method: hookit]
 		* [API#hookit method: getReturnAddressByName]
 		* [API#hookit method: getReturnAddressById]
