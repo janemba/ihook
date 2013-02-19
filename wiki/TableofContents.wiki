@@ -6,3 +6,5 @@
 		* [API#hookit method: unhookByName]
 		* [API#hookit method: unhookById]
 	* [http://code.google.com/p/ihook/wiki/IhookOverview IHOOK OVERVIEW]
+		* [IhookOverview#Using_ihook_static_library_for_DLL_injection static library for DLL injection]
+		* [IhookOverview#Using_ihook_shared_libray_for_a_basic_application shared library for a basic application]
