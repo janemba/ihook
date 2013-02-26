@@ -39,10 +39,10 @@
 #include <windows.h>
 
 enum ERROR_LIST {
-    ERR_ALLOCA  = -2,       // Can't get allocated memory
-    ERR_ADDR    = -3,       // Can't get address of function
-    ERR_PROT    = -4,       // Can't set permission to a specified page
-    ERR_NOTLIST = -5,       // Node referenced by name or id not in list
+    ERR_ALLOCA  = -2,       // Can't allocate memory
+    ERR_ADDR    = -3,       // Can't get address of original function
+    ERR_PROT    = -4,       // Can't set permission to a page pointed by original function
+    ERR_NOTLIST = -5,       // Node referenced by name, id or address not in list (not hooked)
     ERR_PARAM   = -6        // Bad parameters
 };
 
@@ -57,12 +57,19 @@ extern "C"
 */
 IHOOKAPI int   IHOOKCALL unhookById(DWORD id);
 IHOOKAPI int   IHOOKCALL unhookByName(char *fctname, char *dllname);
+IHOOKAPI int   IHOOKCALL unhookByAddress(DWORD hookedAddr);
+
 IHOOKAPI DWORD IHOOKCALL getReturnAddressById(DWORD id);
 IHOOKAPI DWORD IHOOKCALL getReturnAddressByName(char *fctname, char *dllname);
-IHOOKAPI int   IHOOKCALL hookit(char *fctname, char *dllname, DWORD hookaddr);
+IHOOKAPI DWORD IHOOKCALL getReturnAddressByAddr(DWORD hookedAddr);
+
+IHOOKAPI int   IHOOKCALL hookitByAddress(DWORD addrToHook, DWORD hookaddr);
+IHOOKAPI int   IHOOKCALL hookitByName(char *fctname, char *dllname, DWORD hookaddr);
 
 #ifdef __cplusplus
 }
 #endif // __cplusplus
+
+char __ihook_version__[] = "1.0.1";
 
 #endif /* __HOOKIT_H__ */
