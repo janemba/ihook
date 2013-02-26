@@ -29,7 +29,7 @@
 					<Clean command="$make -f $makefile clean" />
 					<DistClean command="$make -f $makefile distclean$target" />
 					<AskRebuildNeeded command="$make -q -f $makefile clean" />
-					<SilentBuild command="$make -f $makefile static &gt; $(CMD_NULL)" />
+					<SilentBuild command="$make -f $makefile shared &gt; $(CMD_NULL)" />
 				</MakeCommands>
 			</Target>
 		</Build>
