@@ -1,4 +1,11 @@
-11/02/13
+02/26/13
+========
+
+	* New API (see API.txt)
+	* You can hook function code (not limited to API)
+	* Bugs correction
+
+02/11/13
 ========
 
 	* Initial export.

@@ -46,6 +46,7 @@ typedef struct      node_s
     char            *fctname;       // Name of the function to hook
     char            *dllname;       // Name of the DLL which function belong to
     BYTE            *erased;        // Backup of bytes erased
+    size_t          lenErased;      // Length of erased opcode
     BYTE            *returned;      // Opcode for returning to the original execution stream
     DWORD           addrHooked;     // Address of the original function to hook
     DWORD           nodeid;         // Identifier of the node
@@ -70,36 +71,36 @@ static struct node_s *hookList_gl = NULL;
 **          _in char* : Name of the DLL which function to hook belong to
 **          _in BYTE* : Backup of erased opcode
 **          _in DWORD : 32-bit address of the function to hook
+**          _in size_t: Size of bytes to erased or saved
 ** OUTPUT : If succeed return a node ID (> 0x1000) otherwise return FALSE
 */
-static inline DWORD             _addHookToList(char *fctname, char *dllname, BYTE *opcode, DWORD addrToHook)
+static inline DWORD             _addHookToList(char *fctname, char *dllname, BYTE *opcode, DWORD addrToHook, size_t lenErased)
 {
     node_t                      *hooknode_s;
     BYTE                        *returned;
-    int                         len_erased;
     int                         jmp;
 
     jmp = JMP_OPCODE;
-    len_erased = strlen((char*) opcode);
-
     hooknode_s = (node_t*) malloc(sizeof(node_t));
     if (! hooknode_s)
         return (FALSE);
 
-    returned = (BYTE *) malloc((sizeof(BYTE) * len_erased) + JMP_SIZE);
+    returned = (BYTE *) malloc((sizeof(BYTE) * lenErased) + JMP_SIZE);
     if (! returned)
         return (FALSE);
 
     ZeroMemory((PVOID) hooknode_s, sizeof(node_t));
-    ZeroMemory((PVOID) returned, (sizeof(BYTE) * len_erased + JMP_SIZE));
+    ZeroMemory((PVOID) returned, (sizeof(BYTE) * lenErased + JMP_SIZE));
 
-    memcpy(returned, opcode, len_erased);
-    memcpy(returned + len_erased, &jmp, 1);
-    * ((DWORD* ) (&returned[len_erased + 1 ]) ) = addrToHook - (DWORD) returned - JMP_SIZE;
+    memcpy(returned, opcode, lenErased);
+    memcpy(returned + lenErased, &jmp, 1);
+
+    * ((DWORD* ) (&returned[lenErased + 1 ]) ) = addrToHook - (DWORD) returned - JMP_SIZE;
 
     hooknode_s->fctname    = fctname;
     hooknode_s->dllname    = dllname;
     hooknode_s->erased     = opcode;
+    hooknode_s->lenErased  = lenErased;
     hooknode_s->addrHooked = addrToHook;
     hooknode_s->returned   = returned;
 
@@ -177,15 +178,13 @@ static void                      _unsetPermission(DWORD addrToHook, DWORD protec
 ** INPUT  :
 **          _in  DWORD : 32-bit address of the function hooked
 **          _in  BYTE* : Opcode erased
+**          _in size_t: Size of bytes erased or saved
 ** OUTPUT : If succeed return TRUE otherwise return FALSE
 */
-static BOOL                     _unsetHook(DWORD addrHooked, BYTE *opcode)
+static BOOL                     _unsetHook(DWORD addrHooked, BYTE *opcode, size_t len)
 {
     size_t                      cnt;
-    size_t                      len;
     DWORD                       oldProtect;
-
-    len = strlen((char *) opcode);
 
     oldProtect = 0;
     if (! _setPermission(addrHooked, &oldProtect))
@@ -228,7 +227,7 @@ static void                     _unsetNode(node_t *cur_node, node_t *prev_node)
 ** OUTPUT : If succeed return the length of byte to be erased otherwise
 **          return a value <= 0.
 */
-static inline int                      _getLDE(DWORD addrToHook)
+static inline int               _getLDE(DWORD addrToHook)
 {
     int                         length, limit;
     DISASM                      dAsm;
@@ -236,7 +235,7 @@ static inline int                      _getLDE(DWORD addrToHook)
     memset(&dAsm, 0, sizeof(DISASM));
 
     length = 0;
-    limit  = (int) (JMP_SIZE + sizeof(addrToHook));
+    limit  = (int) JMP_SIZE;
     while (length < limit)
     {
         dAsm.EIP = addrToHook + length;
@@ -245,6 +244,7 @@ static inline int                      _getLDE(DWORD addrToHook)
         if (length == UNKNOWN_OPCODE ||length == OUT_OF_BLOCK)
             return (length);
     }
+
     return (length);
 }
 
@@ -253,7 +253,7 @@ static inline int                      _getLDE(DWORD addrToHook)
 ** INPUT  :
 **          _in DWORD : 32-bit address of the function to hook
 **          _in DWORD : 32-bit address of the hook function
-**          _in int   :Length of byte to erased
+**          _in int   : Length of byte to erased
 ** OUTPUT : If succeed return BYTE array of erased opcode otherwise return
 **          NULL.
 */
@@ -321,10 +321,12 @@ static node_t                    *_getNodeByName(char *fctname, char *dllname)
     move_s = hookList_gl;
     while (move_s)
     {
-        if ( strncmp(move_s->fctname, fctname, strlen(fctname)) == 0 &&
-             strncmp(move_s->dllname, dllname, strlen(dllname)) == 0 )
-             return (move_s);
-
+        if (move_s->fctname != NULL && move_s->dllname != NULL)
+        {
+            if ( strncmp(move_s->fctname, fctname, strlen(fctname)) == 0 &&
+                 strncmp(move_s->dllname, dllname, strlen(dllname)) == 0 )
+                 return (move_s);
+        }
         move_s = move_s->next;
     }
 
@@ -352,6 +354,26 @@ static node_t                    *_getNodeById(DWORD id)
     return (NULL);
 }
 
+/*
+** DESC   : Get a node by the address of the original function.
+** INPUT  :
+**          _in DWORD : 32-bit address of the original function
+** OUTPUT : If succeed return the node otherwise return FALSE.
+*/
+static node_t                    *_getNodeByAddr(DWORD addrHooked)
+{
+    node_t                       *move_s;
+
+    move_s = hookList_gl;
+    while (move_s)
+    {
+        if (move_s->addrHooked == addrHooked)
+            return (move_s);
+        move_s = move_s->next;
+    }
+
+    return (NULL);
+}
 
 
 /****
@@ -396,7 +418,25 @@ DWORD IHOOKCALL                 getReturnAddressById(DWORD id)
 }
 
 /*
-** DESC   : Remove all the hook data (internal to hookit include) by its ID
+** DESC   : Get the address which contain the original execution stream.
+** INPUT  :
+**          _in DWORD : 32-bit address of the original function hooked
+** OUTPUT : If succeed return the re-entrant addresss otherwise return value < 0.
+*/
+DWORD IHOOKCALL                 getReturnAddressByAddr(DWORD addrHooked)
+{
+    node_t                      *node;
+
+    node = _getNodeByAddr(addrHooked);
+    if (! node)
+        return (ERR_NOTLIST);
+
+    return ((DWORD) node->returned);
+}
+
+
+/*
+** DESC   : Remove all the hook data (internal to hookit) by ID
 ** INPUT  :
 **          _in DWORD : Node ID of the hook meta-information
 ** OUTPUT : If succeed return TRUE otherwise return value < 0.
@@ -412,7 +452,7 @@ int IHOOKCALL                   unhookById(DWORD id)
     {
         if (move_s->nodeid == id)
         {
-            if (! _unsetHook(move_s->addrHooked, move_s->erased))
+            if (! _unsetHook(move_s->addrHooked, move_s->erased, move_s->lenErased))
                 return (ERR_PROT);
             _unsetNode(move_s, prev_s);
             return (TRUE);
@@ -425,7 +465,7 @@ int IHOOKCALL                   unhookById(DWORD id)
 }
 
 /*
-** DESC   : Remove all the hook data (internal to hookit include) by its name
+** DESC   : Remove all the hook data (internal to hookit) by name
 ** INPUT  :
 **          _in char* : Name of the function
 **          _in char* : Name of the DLL which function belong to
@@ -443,19 +483,86 @@ int IHOOKCALL                   unhookByName(char *fctname, char *dllname)
     move_s = hookList_gl;
     while (move_s)
     {
-        if ( strncmp(move_s->fctname, fctname, strlen(fctname)) == 0 &&
-             strncmp(move_s->dllname, dllname, strlen(dllname)) == 0 )
+        if (move_s->fctname != NULL && move_s->dllname != NULL)
+        {
+            if ( strncmp(move_s->fctname, fctname, strlen(fctname)) == 0 &&
+                 strncmp(move_s->dllname, dllname, strlen(dllname)) == 0 )
             {
-                if (! _unsetHook(move_s->addrHooked, move_s->erased))
+                if (! _unsetHook(move_s->addrHooked, move_s->erased, move_s->lenErased))
                     return (ERR_PROT);
                 _unsetNode(move_s, prev_s);
                 return (TRUE);
             }
+        }
         prev_s = move_s;
         move_s = move_s->next;
     }
 
     return (ERR_NOTLIST);
+}
+
+/*
+** DESC   : Remove all the hook data (internal to hookit) by address of the
+**          original function
+** INPUT  :
+**          _in DWORD : Address of the original function hooked
+** OUTPUT : If succeed return TRUE otherwise return value < 0.
+*/
+int IHOOKCALL                   unhookByAddress(DWORD addrHooked)
+{
+    node_t                      *move_s;
+    node_t                      *prev_s;
+
+    prev_s = NULL;
+    move_s = hookList_gl;
+    while (move_s)
+    {
+        if (move_s->addrHooked == addrHooked)
+        {
+            if (! _unsetHook(move_s->addrHooked, move_s->erased, move_s->lenErased))
+                return (ERR_PROT);
+            _unsetNode(move_s, prev_s);
+            return (TRUE);
+        }
+        prev_s = move_s;
+        move_s = move_s->next;
+    }
+    return (ERR_NOTLIST);
+}
+
+
+/*
+** DESC   : Hook a windows code address.
+** INPUT  :
+**          _in char* : 32-bit address of the orginal function/code to hook
+**          _in DWORD : 32-bit address of the hook function
+** OUTPUT : If succeed return a node ID otherwise return value <= 0.
+*/
+int IHOOKCALL                   hookitByAddress(DWORD addrToHook, DWORD hookaddr)
+{
+    DWORD                       id;
+    DWORD                       oldProtect;
+    int                         lde;
+    BYTE                       *opcode;
+
+    oldProtect = 0;
+    if (! _setPermission(addrToHook, &oldProtect))
+        return (ERR_PROT);
+
+    lde = _getLDE(addrToHook);
+    if (lde <= 0)
+        return (lde);
+
+    opcode = _writeDetour(addrToHook, hookaddr, lde);
+
+    _unsetPermission(addrToHook, oldProtect);
+
+    if (! opcode)
+        return (ERR_ALLOCA);
+
+    id = _addHookToList(NULL, NULL, opcode, addrToHook, lde);
+
+    return (id);
 }
 
 /*
@@ -466,11 +573,11 @@ int IHOOKCALL                   unhookByName(char *fctname, char *dllname)
 **          _in DWORD : 32-bit address of the hook function
 ** OUTPUT : If succeed return a node ID otherwise return value <= 0.
 */
-int IHOOKCALL                   hookit(char *fctname, char *dllname, DWORD hookaddr)
+int IHOOKCALL                   hookitByName(char *fctname, char *dllname, DWORD hookaddr)
 {
     DWORD                       addrToHook;
     DWORD                       oldProtect;
-    BYTE                       *opcode;
+    BYTE                        *opcode;
     node_t                      *hooknode_s;
     DWORD                       id;
     int                         lde;
@@ -498,8 +605,7 @@ int IHOOKCALL                   hookit(char *fctname, char *dllname, DWORD hooka
     if (! opcode)
         return (ERR_ALLOCA);
 
-    id = _addHookToList(fctname, dllname, opcode, addrToHook);
+    id = _addHookToList(fctname, dllname, opcode, addrToHook, lde);
 
     return (id);
 }
-
