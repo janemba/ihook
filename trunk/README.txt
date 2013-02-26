@@ -20,12 +20,14 @@ HOW TO USE
 
 IHOOK provide the following methods :
 
-	hookit			// Method performing the hook
+	hookitByName		// Method performing hook by using name of the function to hook
+	hookitByAddress		// Method performing hook by using address of the original function
 	getReturnAddressById	// Get the address of the re-entrant execution stream
 	getReturnAddressByName	// Idem
+	getReturnAddressByAddr	// Idem
 	unhookByName		// Cleanup the hook
 	unhookById		// Idem
-
+	unhookByAddress		// Idem
 
 see API.txt for a detailed description of the previous methods.
 
@@ -114,7 +116,7 @@ int	main(void)
 {
   int	ret;
 
-  ret = hookit("recv", "ws2_32.dll", (DWORD)Myrecv);
+  ret = hookitByName("recv", "ws2_32.dll", (DWORD)Myrecv);
   if (ret <= 0)
     printf("Some error here: %i\n", ret);
   unhookById(ret);  // or unhookByName("recv", "ws2_32.dll");
