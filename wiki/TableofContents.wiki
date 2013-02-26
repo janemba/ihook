@@ -12,7 +12,7 @@
 		* [API#hookitByAddress method: hookitByAddress]      
 		* [API#getReturnAddressByName method: getReturnAddressByName]
 		* [API#getReturnAddressById method: getReturnAddressById]
- 		* [API#getReturnAddressByAddr method: getReturnAddressByAddr]
+		* [API#getReturnAddressByAddr method: getReturnAddressByAddr]
 		* [API#unhookByName method: unhookByName]
 		* [API#unhookById method: unhookById]  	
 		* [API#unhookByAddress method: unhookByAddress]
