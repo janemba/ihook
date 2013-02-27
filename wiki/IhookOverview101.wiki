@@ -44,6 +44,7 @@ static void writeToLog(const char *msg)
         MessageBoxA(NULL, "CreateFile", "ERROR", MB_OK);
     else {
            WriteFile(hFile, msg, strlen(msg), &dwBytesWritten, NULL);
+           WriteFile(hFile, "\n", 1, &dwBytesWritten, NULL);
            CloseHandle(hFile);
     }
 }
