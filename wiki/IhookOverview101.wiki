@@ -31,7 +31,13 @@ static void writeToLog(const char *msg)
     HANDLE hFile;
     DWORD dwBytesWritten = 0;
 
-    hFile = CreateFile("C:\\test_log.txt", FILE_APPEND_DATA, FILE_SHARE_READ, NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+    hFile = CreateFile("C:\\test_log.txt",
+                       FILE_APPEND_DATA,
+                       FILE_SHARE_READ,
+                       NULL,
+                       OPEN_ALWAYS,
+                       FILE_ATTRIBUTE_NORMAL,
+                       NULL);
     if (hFile == INVALID_HANDLE_VALUE)
         MessageBoxA(NULL, "CreateFile", "ERROR", MB_OK);
     else {
@@ -89,23 +95,11 @@ static int  hook_nothing(const char *msg)
 
 extern "C" DLL_EXPORT BOOL APIENTRY DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved)
 {
-    DWORD   id = 0;
-
     switch (fdwReason)
     {
         case DLL_PROCESS_ATTACH:
-            id = hookitByAddress((DWORD) &nothing, (DWORD) &hook_nothing);
-            if (id <= 0)
-            {
-                writeToLog("Something goes wrong, check returned value\n");
-                return -1;
-            }
-
-            id = hookitByName((char*)"HttpOpenRequestA", (char*)"wininet.dll", (DWORD) hook_OpenRequest);
-            if (id <= 0) {
-                writeToLog("Something goes wrong, check returned value\n");
-                return -2;
-            }
+            hookitByAddress((DWORD) &nothing, (DWORD) &hook_nothing);
+            hookitByName((char*)"HttpOpenRequestA", (char*)"wininet.dll", (DWORD) hook_OpenRequest);
 
             nothing("hook function code");
 
@@ -152,4 +146,3 @@ mingw32-gcc-4.7.2.exe -shared -Wl,--output-def=bin\Release\libihook_test_dll.def
 Next *RemoteDLL* was used to inject the DLL inside *IEXPLORE.exe* process.
 
 [http://ihook.googlecode.com/svn/wiki/ihook_static.png]
-
