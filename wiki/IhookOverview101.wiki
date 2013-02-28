@@ -156,7 +156,7 @@ c:\>type test.log.txt
 /js/lib/login.slashdot.org/engage.js
 /ga.js
 /adj/ostg.slashdot/
-...
+[...]
 /pagead/images/adchoices/icon.png
 /pagead/images/adchoices/en.png
 /push?client=ca-pub-4006818487458500
