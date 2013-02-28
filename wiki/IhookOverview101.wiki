@@ -143,4 +143,4 @@ mingw32-gcc-4.7.2.exe -shared -Wl,--output-def=bin\Release\libihook_test_dll.def
 
 Next *RemoteDLL* was used to inject the DLL inside *IEXPLORE.exe* process.
 
-[http://code.google.com/p/ihook/wiki/ihook_101_static.png]
+[[http://ihook.googlecode.com/svn/wiki/ihook_101_static.png]
