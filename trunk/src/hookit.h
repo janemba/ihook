@@ -70,6 +70,6 @@ IHOOKAPI int   IHOOKCALL hookitByName(char *fctname, char *dllname, DWORD hookad
 }
 #endif // __cplusplus
 
-char __ihook_version__[] = "1.0.1";
+const char __ihook_version__[] = "1.0.2";
 
 #endif /* __HOOKIT_H__ */
