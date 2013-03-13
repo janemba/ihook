@@ -1,5 +1,31 @@
 NAME
 
+__ihook_version__
+
+SYNOPSIS
+
+const char __ihook_version__[]
+
+DESCRIPTION
+
+Check library version
+
+RETURN VALUE
+
+Version of the library
+
+EXAMPLE
+
+    extern char __ihook_version__[];
+
+    MessageBoxA(NULL, __ihook_version__, "version", MB_OK);
+
+
+----------------------------------------
+
+
+NAME
+
 hookitByName
 
 SYNOPSIS

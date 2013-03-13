@@ -1,6 +1,12 @@
 02/26/13
 ========
 
+	* New API variable (check ihook version with __ihook_version__ string)
+	* Bugs correction
+
+02/26/13
+========
+
 	* New API (see API.txt)
 	* You can hook function code (not limited to API)
 	* Bugs correction
