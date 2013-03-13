@@ -20,5 +20,5 @@
 	* [IhookOverview IHOOK OVERVIEW v1.0.0]
 		* [IhookOverview#Using_ihook_static_library_for_DLL_injection static library for DLL injection]
 		* [IhookOverview#Using_ihook_shared_library_for_a_basic_application shared library for a basic application]
-	* [IhookOverview101 IHOOK OVERVIEW v1.0.1]
+	* [IhookOverview101 IHOOK OVERVIEW v1.0.1+]
 		* [IhookOverview101#Using_ihook_static_library_for_DLL_injection static library for DLL injection]
