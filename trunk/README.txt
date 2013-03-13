@@ -39,6 +39,7 @@ It is used for the calling convention.
 
 You don't need it if you use IHOOK as a shared library (.dll).
 
+Moreover, don't forget to use hookit.h file from header directory in your application.
 
 
 HOW TO COMPILE YOUR PROJECT WITH IHOOK STATIC LIBRARY (libihook.lib)
