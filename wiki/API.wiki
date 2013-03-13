@@ -1,6 +1,4 @@
 #labels Phase-Implementation
-= VARIABLE =
-
 = VARIABLE LIST =
 	* [API#version __ihook_verion__]
 
@@ -31,6 +29,8 @@ extern char __ihook_version__[];
 MessageBoxA(NULL, __ihook_version__, "version", MB_OK);
 }}}
 
+----
+----
 ----
 
 = METHOD LIST =
