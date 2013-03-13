@@ -20,7 +20,7 @@ const char __ihook_version__[]
 
 = RETURN VALUE =
 
-*__ihook_version__* return version of the library/
+*__ihook_version__* return version of the library.
 
 = EXAMPLE =
 {{{
@@ -32,6 +32,8 @@ MessageBoxA(NULL, __ihook_version__, "version", MB_OK);
 ----
 ----
 ----
+<br/>
+<br/>
 
 = METHOD LIST =
 	* [API#hookitByName hookitByName]
