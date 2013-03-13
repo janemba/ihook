@@ -1,6 +1,6 @@
 #labels Phase-Implementation
 = VARIABLE LIST =
-	* [API#version __ihook_verion__]
+	* [API#version __ihook_version__]
 
 ----
 ----
