@@ -1,5 +1,3 @@
-WORKDIR = %cd%
-
 CC = gcc.exe
 AR = ar.exe
 LD = ld.exe
@@ -17,12 +15,11 @@ OBJ_RELEASE  	   = $(OBJDIR_RELEASE)\\hookit.o $(OBJDIR_RELEASE)\\BeaEngine.o
 OUT_RELEASE_STATIC = $(DIR_RELEASE)\\libihook.lib
 OUT_RELEASE_SHARED = $(DIR_RELEASE)\\libihook.dll
 
-DELTMP = cmd /c del /f libfoo.o
+DELTMP = cmd /c del /Q /f libfoo.o
 
-all:
-	@echo You must perform "make static" or "make shared"
-	@echo static stand for library file
-	@echo shared stand for dll file
+all: ihook
+
+ihook: static shared
 
 before_release:
 	cmd /c if not exist $(OBJDIR_RELEASE) md $(OBJDIR_RELEASE)
@@ -51,7 +48,7 @@ $(OBJDIR_RELEASE)\\BeaEngine.o: $(DEP_SRC)\\BeaEngine.c
 	$(CC) $(CFLAGS) $(INC_RELEASE) -DBEA_ENGINE_STATIC -c $(DEP_SRC)\\BeaEngine.c -o $(OBJDIR_RELEASE)\\BeaEngine.o
 
 clean:
-	cmd /c del /f $(OBJ_RELEASE) $(OUT_RELEASE_STATIC) $(OUT_RELEASE_SHARED)
+	cmd /c del /Q /f $(OBJ_RELEASE) $(OUT_RELEASE_STATIC) $(OUT_RELEASE_SHARED)
 	cmd /c rd $(OBJDIR_RELEASE)
 
 .PHONY: before_release out_static out_shared static shared clean
