@@ -7,6 +7,7 @@
 		* [http://code.google.com/p/ihook#EXAMPLE example]
 		* [http://code.google.com/p/ihook#TODO todo]
 	* [API]
+		* [API#VARIABLE_LIST variable list]
 		* [API#METHOD_LIST method list]
 		* [API#hookitByName method: hookitByName]
 		* [API#hookitByAddress method: hookitByAddress]      
