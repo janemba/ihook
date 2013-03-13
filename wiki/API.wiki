@@ -7,7 +7,7 @@
 <br/>
 = NAME =
 
-== ____ihook_version____ ==
+== *__ihook_version__* ==
 
 = SYNOPSIS =
 {{{
