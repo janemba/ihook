@@ -183,7 +183,7 @@ File from ihook package in header directory.
 = Compiling example with Visual Studio =
 
  # Create an empty DLL project
- # Add main.cpp and hookit.h file to the project. Don't forget to copy libihook_vs.lib file in the same directory that source files.
+ # Add _main.cpp_ and _hookit.h_ file to the project. Don't forget to copy libihook_vs.lib file in the same directory that source files.
  # Go to project properties -> _Configuration Properties_ -> _C/C++_ -> _Preprocessor_
     * Select _Preprocessor Definitions_ -> _edit_ and add the following constant: _IHOOK_ENGINE_LIB_
  # Compile.
@@ -193,7 +193,7 @@ File from ihook package in header directory.
 = Compiling example with Code::Blocks =
 
  # Create a _shared library_ project
- # Add main.cpp and hookit.h file to the project. Don't forget to copy libihook.lib file in the same directory that source files.
+ # Add _main.cpp_ and _hookit.h_ file to the project. Don't forget to copy _libihook.lib_ file in the same source files directory.
  # Go to Build Options -> select _Release_ on the left pane -> _Compiler settings_ -> _#defines_ -> add the following:
     * _IHOOK_ENGINE_LIB_
  # _Linker settings_ -> in _other link options_ pane add the following:
