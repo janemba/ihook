@@ -59,6 +59,9 @@ extern "C"
 /*
 ** Public API
 */
+
+const char __ihook_version__[] = "1.0.3";
+
 IHOOKAPI int   IHOOKCALL unhookById(DWORD id);
 IHOOKAPI int   IHOOKCALL unhookByName(char *fctname, char *dllname);
 IHOOKAPI int   IHOOKCALL unhookByAddress(DWORD hookedAddr);
@@ -74,6 +77,5 @@ IHOOKAPI int   IHOOKCALL hookitByName(char *fctname, char *dllname, DWORD hookad
 }
 #endif /* __cplusplus */
 
-const char __ihook_version__[] = "1.0.3";
 
 #endif /* __HOOKIT_H__ */
