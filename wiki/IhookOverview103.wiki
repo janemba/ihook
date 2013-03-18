@@ -2,7 +2,7 @@
 <wiki:toc max_depth="1" />
 = Introduction =
 
-All the tests was made with Visual Studio express 2010.
+All the tests was made with Visual Studio express 2010 and mingw32++ (and optionnaly Code::Blocks).
 
 
 = Compiling ihook with Visual Studio =
@@ -23,11 +23,23 @@ Now, for the last step some directive for the preprocessor must be added:
  * Go to project properties -> _Configuration Properties_ -> _C/C++_ -> _Preprocessor_
  * Select _Preprocessor Definitions_ -> _edit_ and add the following constant (one per line):
     * _IHOOK_CALL_STDCALL_
-    * _IHOOK_ENGINE_LIB
+    * _IHOOK_ENGINE_LIB_
     * _BEA_ENGINE_STATIC_
 
 And voilà ! The project is ready to compile but you will get a lot of warning due to the use of _strcpy_ function. Don't worry :)
 
+To compile ihook as a shared library (DLL file), just create a _Win32 Project_ and select _DLL_, _next_ and select _Empty Project_.
 
-= Using ihook library with Visual Studio =
+Next, the previous last step need to be modified. Only the following constant is required:
+    * _IHOOK_ENGINE_DLL_
+    * _BEA_ENGINE_STATIC_
+
+
+
+= Compiling ihook with MINGW =
+
+Just use the Makefile in _src_ directory.
+
+
+= Using ihook static library =
 
