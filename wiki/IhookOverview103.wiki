@@ -190,7 +190,7 @@ File from ihook package in header directory.
 
 [http://ihook.googlecode.com/svn/wiki/vs.png]
 
-= Compiling example with Code::Blocks 
+= Compiling example with Code::Blocks =
 
  # Create a _shared library_ project
  # Add main.cpp and hookit.h file to the project. Don't forget to copy libihook_vs.lib file in the same directory that source files.
