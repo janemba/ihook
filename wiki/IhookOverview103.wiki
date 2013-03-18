@@ -160,7 +160,7 @@ extern "C" __declspec(dllexport) BOOL APIENTRY DllMain(HINSTANCE hinstDLL, DWORD
     {
         case DLL_PROCESS_ATTACH:
             writeToLog(__ihook_version__);
-            id = hookitByAddress((DWORD) &nothing, (DWORD) &hook_nothing); // or hookitByAddress(*(DWORD) &nothing + 5*, (DWORD) &hook_nothing)
+            id = hookitByAddress((DWORD) &nothing, (DWORD) &hook_nothing); // or hookitByAddress((DWORD) &nothing + 5, (DWORD) &hook_nothing)
             if (id <= 0)
             {
                 writeToLog("Something goes wrong, check returned value");
