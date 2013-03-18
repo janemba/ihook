@@ -185,6 +185,5 @@ File from ihook package in header directory.
  # Create an empty DLL project
  # Add main.cpp and hookit.h file
  # Go to project properties -> _Configuration Properties_ -> _C/C++_ -> _Preprocessor_
-    * Select _Preprocessor Definitions_ -> _edit_ and add the following constant (one per line):
-    * _IHOOK_ENGINE_LIB_
+    * Select _Preprocessor Definitions_ -> _edit_ and add the following constant: _IHOOK_ENGINE_LIB_
  # That's all.
