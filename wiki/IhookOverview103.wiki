@@ -187,3 +187,5 @@ File from ihook package in header directory.
  # Go to project properties -> _Configuration Properties_ -> _C/C++_ -> _Preprocessor_
     * Select _Preprocessor Definitions_ -> _edit_ and add the following constant: _IHOOK_ENGINE_LIB_
  # That's all.
+
+[http://ihook.googlecode.com/svn/wiki/vs.png]
