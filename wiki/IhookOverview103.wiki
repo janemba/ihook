@@ -21,7 +21,7 @@ To finish, _BeaEngine_ header must be added:
 
 Now, for the last step some directive for the preprocessor must be added:
  * Go to project properties -> _Configuration Properties_ -> _C/C++_ -> _Preprocessor_
- * Select _Preprocessor Definitions_ -> _edit_ and add the following constant (one per line):
+ * Select _Preprocessor Definitions_ -> _edit_ and add the following constants (one per line):
     * _IHOOK_CALL_STDCALL_
     * _IHOOK_ENGINE_LIB_
     * _BEA_ENGINE_STATIC_
@@ -48,6 +48,8 @@ Just use the Makefile in _src_ directory.
 In this example two hook type is used :
  # Hook on a Windows API function : _httpOpenRequestA_ from _wininet.dll_ 
  # Hook on a function code : function inside the DLL
+
+After, the DLL file was generated it can be injected using *RemoteDLL*.
 
 === `main.cpp` ===
 {{{
@@ -175,5 +177,14 @@ extern "C" __declspec(dllexport) BOOL APIENTRY DllMain(HINSTANCE hinstDLL, DWORD
 
 === `hookit.h` ===
 {{{
-File from ihook package in _header_ directory.
+File from ihook package in header directory.
 }}}
+
+= Compiling example with Visual Studio =
+
+ # Create an empty DLL project
+ # Add main.cpp and hookit.h file
+ # Go to project properties -> _Configuration Properties_ -> _C/C++_ -> _Preprocessor_
+    * Select _Preprocessor Definitions_ -> _edit_ and add the following constant (one per line):
+    * _IHOOK_ENGINE_LIB_
+ # That's all.
