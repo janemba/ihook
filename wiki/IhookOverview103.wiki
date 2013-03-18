@@ -27,3 +27,7 @@ Now, for the last step some directive for the preprocessor must be added:
     * _BEA_ENGINE_STATIC_
 
 And voilà ! The project is ready to compile but you will get a lot of warning due to the use of _strcpy_ function. Don't worry :)
+
+
+= Using ihook library with Visual Studio =
+
