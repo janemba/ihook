@@ -199,3 +199,5 @@ File from ihook package in header directory.
  # _Linker settings_ -> in _other link options_ pane add the following:
     * _-L. -llibihook
  # Compile.
+
+[http://ihook.googlecode.com/svn/wiki/cb.png]
