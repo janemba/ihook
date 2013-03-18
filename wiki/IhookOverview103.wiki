@@ -205,7 +205,7 @@ extern "C" __declspec(dllexport) BOOL APIENTRY DllMain(HINSTANCE hinstDLL, DWORD
 File from ihook package in header directory.
 }}}
 
-= Compiling example with Visual Studio =
+== Compiling example with Visual Studio ==
 
  # Create an empty DLL project
  # Add _main.cpp_ and _hookit.h_ file to the project. Don't forget to copy libihook_vs.lib file in the same directory that source files.
@@ -215,7 +215,7 @@ File from ihook package in header directory.
 
 [http://ihook.googlecode.com/svn/wiki/vs.png]
 
-= Compiling example with Code::Blocks =
+== Compiling example with Code::Blocks ==
 
  # Create a _shared library_ project
  # Add _main.cpp_ and _hookit.h_ file to the project. Don't forget to copy _libihook.lib_ file in the same source files directory.
@@ -227,7 +227,7 @@ File from ihook package in header directory.
 
 [http://ihook.googlecode.com/svn/wiki/cb.png]
 
-= Compiling example with MinGW =
+== Compiling example with MinGW ==
 
  # Go to _example_ directory from ihook package
  # Type the following:
