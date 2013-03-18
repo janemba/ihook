@@ -6,7 +6,9 @@
 All the tests was made with Visual Studio express 2010 and mingw32++ (and optionnaly Code::Blocks).
 
 
-= Compiling ihook with Visual Studio =
+= Compiling ihook project =
+
+== Compiling ihook with Visual Studio ==
 
 Some steps is required in order to compile ihook project with Visual Studio. First of all the latest sources must be downloaded. Once done, open Visual Studio and create a new project as _Win32 Project_, click _next_, select _Static library_ and unselect _Precompiled header_.
 
@@ -37,7 +39,7 @@ Next, the previous last step need to be modified. Only the following constant is
 
 
 
-= Compiling ihook with Code::Blocks =
+== Compiling ihook with Code::Blocks ==
 
 A _Makefile_ is provided to compile ihook with C::B. Here is the step required to compile ihook project:
  # Create a _static library_ project.
@@ -58,7 +60,7 @@ $make -q -f $makefile clean
 }}}
 
 
-= Compiling ihook with MinGW =
+== Compiling ihook with MinGW ==
 
 Go to the source (_src_) directory and just type the following command:
 {{{
