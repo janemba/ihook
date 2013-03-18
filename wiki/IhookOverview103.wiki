@@ -226,7 +226,7 @@ File from ihook package in header directory.
 
 [http://ihook.googlecode.com/svn/wiki/cb.png]
 
-= Compiling example with MingW =
+= Compiling example with MinGW =
 
  # Go to _example_ directory from ihook package
  # Type the following:
