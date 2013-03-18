@@ -25,16 +25,20 @@
   #define IHOOKAPI __declspec(dllexport)
  #else
   #define IHOOKAPI __declspec(dllimport)
- #endif // IHOOK_ENGINE_DLL
+ #endif /* IHOOK_ENGINE_DLL */
 #else
  #define IHOOKAPI
-#endif // IHOOK_ENGINE_LIB
+#endif /* IHOOK_ENGINE_LIB */
 
 #if defined(IHOOK_CALL_STDCALL)
  #define IHOOKCALL __stdcall
 #else
  #define IHOOKCALL __cdecl
-#endif // IHOOK_CALL_STDCALL
+#endif /* IHOOK_CALL_STDCALL */
+
+#if defined(_MSC_VER)
+ #define inline __inline
+#endif /* _MSC_VER */
 
 #include <windows.h>
 
@@ -50,7 +54,7 @@ enum ERROR_LIST {
 #ifdef __cplusplus
 extern "C"
 {
-#endif //__cpluscplus
+#endif /* __cpluscplus */
 
 /*
 ** Public API
@@ -68,8 +72,8 @@ IHOOKAPI int   IHOOKCALL hookitByName(char *fctname, char *dllname, DWORD hookad
 
 #ifdef __cplusplus
 }
-#endif // __cplusplus
+#endif /* __cplusplus */
 
-const char __ihook_version__[] = "1.0.2";
+const char __ihook_version__[] = "1.0.3";
 
 #endif /* __HOOKIT_H__ */
