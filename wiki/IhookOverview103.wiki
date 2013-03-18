@@ -56,6 +56,15 @@ $make -f $makefile clean
 $make -q -f $makefile clean
 }}}
 
+
+= Compiling ihook with MinGW =
+
+Go to the source (_src_) directory and just type the following command:
+{{{
+make ihook
+}}}
+
+
 = Using ihook static library =
 
 == Example ==
