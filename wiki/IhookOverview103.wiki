@@ -193,7 +193,7 @@ File from ihook package in header directory.
 = Compiling example with Code::Blocks =
 
  # Create a _shared library_ project
- # Add main.cpp and hookit.h file to the project. Don't forget to copy libihook_vs.lib file in the same directory that source files.
+ # Add main.cpp and hookit.h file to the project. Don't forget to copy libihook.lib file in the same directory that source files.
  # Go to Build Options -> select _Release_ on the left pane -> _Compiler settings_ -> _#defines_ -> add the following:
     * _IHOOK_ENGINE_LIB_
  # _Linker settings_ -> in _other link options_ pane add the following:
