@@ -36,10 +36,25 @@ Next, the previous last step need to be modified. Only the following constant is
 
 
 
-= Compiling ihook with MINGW =
+= Compiling ihook with Code::Blocks =
 
-Just use the Makefile in _src_ directory.
+A _Makefile_ is provided to compile ihook with C::B. Here is the step required to compile ihook project:
+ # Create a _static library_ project.
+ # Copy _hookit.c_, _hookit.h_, _Makefile_ and _dep_ directory into the project directory.
+ # Add _hookit.c_ and _hookit.h_ in the project (_Right-click on the project name and select Add -> Existing files_).
+ # Go to the properties of the project and click to _Project settings_ tab.
+ # Select _This is a custom Makefile_.
 
+First step done. Now C::B need to know which rules to invoke for the makefile. Here is the required steps:
+ # In project properties click on _Build target_ tab and click to _Build options_ button.
+ # Select _"Make" commands_ tab.
+ # insert the following:
+{{{
+$make -f $makefile ihook
+$make -f $makefile $file
+$make -f $makefile clean
+$make -q -f $makefile clean
+}}}
 
 = Using ihook static library =
 
