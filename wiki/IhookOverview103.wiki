@@ -231,6 +231,6 @@ File from ihook package in header directory.
  # Go to _example_ directory from ihook package
  # Type the following:
 {{{
-C:\Dev\ihook\example>mingw32-gcc -O2 -Wall -DIHOOK_ENGINE_LIB   -c main.cpp -o main.o
+C:\Dev\ihook\example>mingw32-gcc -O2 -Wall -DIHOOK_ENGINE_LIB -c main.cpp -o main.o
 C:\Dev\ihook\example>mingw32-gcc -shared -o test.dll main.o libihook.lib
 }}}
