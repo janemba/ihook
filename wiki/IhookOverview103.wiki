@@ -189,3 +189,5 @@ File from ihook package in header directory.
  # That's all.
 
 [http://ihook.googlecode.com/svn/wiki/vs.png]
+
+= Compiling example with Code::Blocks =
