@@ -42,4 +42,3 @@ Just use the Makefile in _src_ directory.
 
 
 = Using ihook static library =
-
