@@ -89,6 +89,23 @@ mingw32-gcc.exe libfoo.o -s -shared -Wl,--subsystem,windows -o bin\\libihook.dll
 
 A temporary library is generated in order to link BeaEngine (.o) object file statically...
 
+You can also compile ihook (static of shared) with visual studio but some step is needed:
+	1) In project Properties -> Configuration Properties -> C/C++
+	   In "Additional Include Directories" add the following BeaEngine include path:
+		...\dep\beaengine\include
+
+	2) In project Properties -> Configuration Properties -> C/C++ -> Preprocessor
+	   In "Preprocessor Definitions" add the following constant:
+		IHOOK_ENGINE_LIB
+		IHOOK_CALL_STDCALL
+		BEA_ENGINE_STATIC  (or BEA_ENGINE_SHARED to compile ihook as a DLL)
+
+	3) Add BeaEngine.c source in the project solution
+		src\dep\beaengine\beaengineSources\BeaEngine.c
+
+	4) That's all. You will get a lot of warning due to the use of strcpy function in BeaEngine
+	    sources but don't worry this is just warning.
+
 
 EXAMPLE
 =======
@@ -124,3 +141,52 @@ int	main(void)
 
   return (0);
 }
+
+SOURCE LAYOUT
+=============
+	
+	ihook
+	  |
+	  |__ example				// Source file example of ihook
+	  |
+	  |__ header				// Application-side header to use with ihook library
+	  |	|
+	  |	|__ hookit.h
+	  |
+	  |__ src				// ihook source files
+	  |	|
+	  |	|__ hookit.c
+	  |	|
+	  |	|__ hookit.h
+	  |	|
+	  |	|__ Makefile
+	  |	|
+	  |	|__ bin				// ihook binary library (*_vs = compiled with visual studio)
+	  |	     |
+	  |	     |__ libihook.lib
+	  |	     |
+	  |	     |__ libihook.dll
+	  |	     |
+	  |	     |__ libihook_vs.lib
+	  |	     |
+	  |	     |__ libihook_vs.dll
+	  |
+	  |__ dep				// ihook dependency
+	  |	|
+	  |	|__ beaengine			// beaengine source
+	  |	     |
+	  |	     |...
+	  |
+	  |__ API.txt
+	  |
+	  |__ AUTHORS.txt
+	  |
+	  |__ CHANGELOG.txt
+	  |
+	  |__ COPYING.LESSER.txt
+	  |
+	  |__ COPYING.txt
+	  |
+	  |__ README.txt
+	  |
+	  |__ TODO.txt

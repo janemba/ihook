@@ -20,7 +20,9 @@
 #include <windows.h>
 #include <string.h>
 
+#ifndef BEA_ENGINE_STATIC
 #define BEA_ENGINE_STATIC
+#endif /* BEA_ENGINE_STATIC */
 #include <beaengine\BeaEngine.h>
 
 #include "hookit.h"
