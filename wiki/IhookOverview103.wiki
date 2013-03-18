@@ -201,3 +201,5 @@ File from ihook package in header directory.
  # Compile.
 
 [http://ihook.googlecode.com/svn/wiki/cb.png]
+
+= Compiling example with MingW =
