@@ -183,7 +183,7 @@ File from ihook package in header directory.
 = Compiling example with Visual Studio =
 
  # Create an empty DLL project
- # Add main.cpp and hookit.h file
+ # Add main.cpp and hookit.h file to the project. Don't forget to copy libihook_vs.lib file in the same directory that source files.
  # Go to project properties -> _Configuration Properties_ -> _C/C++_ -> _Preprocessor_
     * Select _Preprocessor Definitions_ -> _edit_ and add the following constant: _IHOOK_ENGINE_LIB_
  # That's all.
