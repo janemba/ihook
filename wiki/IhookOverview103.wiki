@@ -72,6 +72,8 @@ make ihook
 
 == Example ==
 
+This example is the same as the previous library version (with small modifications). It simply hook _httpOpenRequestA_ function from _wininet.dll_ library. Next, the _objectName_ parameter is writing in _C:\test_log.txt_. Moreover, a function that just call _MessageBox_ function is hooked to demonstrate to ability to hook everywhere. In fact, the API function used to do this is not limited to function hooking. It is what I called *code hooking*.
+
 In this example two hook type is used :
  # Hook on a Windows API function : _httpOpenRequestA_ from _wininet.dll_ 
  # Hook on a function code : function inside the DLL
